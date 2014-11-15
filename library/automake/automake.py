@@ -16,12 +16,11 @@ class automake(ShutItModule):
 		shutit.install('tar')
 		shutit.install('wget')
 		shutit.install('gcc')
-		shutit.install('autoconf') #required
 		shutit.send('pushd /opt')
 		shutit.send('mkdir -p automake')
 		shutit.send('pushd /opt/automake')
-		shutit.send('wget http://ftp.gnu.org/gnu/automake/automake-1.14.tar.xz')
-		shutit.send('xz -d automake-1.14.tar.xz')
+		shutit.send('wget http://ftp.gnu.org/gnu/automake/automake-1.14.tar.gz')
+		shutit.send('gunzip automake-1.14.tar.gz')
 		shutit.send('tar -xf automake-1.14.tar')
 		shutit.send('pushd /opt/automake/automake-1.14')
 		shutit.send('./configure')
@@ -31,7 +30,6 @@ class automake(ShutItModule):
 		shutit.send('popd')
 		shutit.send('popd')
 		shutit.send('rm -rf /opt/automake')
-		shutit.remove('autoconf') #required
 		return True
 
 	#def get_config(self, shutit):

@@ -19,7 +19,8 @@ class yacc(ShutItModule):
 		shutit.send('mkdir -p byacc')
 		shutit.send('pushd /opt/byacc')
 		shutit.send('wget http://invisible-island.net/datafiles/release/byacc.tar.gz')
-		shutit.send('tar -zxf byacc.tar.gz')
+		shutit.send('gunzip byacc.tar.gz')
+		shutit.send('tar -xf byacc.tar')
 		shutit.send('pushd byacc-*') # don't know date in dirname
 		shutit.send('./configure --prefix=/usr')
 		shutit.send('make')
@@ -53,9 +54,9 @@ class yacc(ShutItModule):
 
 def module():
 	return yacc(
-		'shutit.tk.yacc.yacc', 0.0121325,
+		'shutit.tk.yacc.yacc', 0.013261325,
 		description='',
 		maintainer='',
-		depends=['shutit.tk.setup','shutit.tk.make.make']
+		depends=['shutit.tk.automake.automake']
 	)
 

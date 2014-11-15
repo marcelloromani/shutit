@@ -18,10 +18,10 @@ class help2man(ShutItModule):
 		shutit.send('pushd /opt')
 		shutit.send('mkdir -p /opt/help2man')
 		shutit.send('pushd /opt/help2man')
-		shutit.send('wget http://ftp.gnu.org/gnu/help2man/help2man-1.46.4.tar.xz')
-		shutit.send('xz -d help2man-1.46.4.tar.xz')
-		shutit.send('tar -xf help2man-1.46.4.tar')
-		shutit.send('pushd help2man-1.46.4')
+		shutit.send('wget http://ftp.gnu.org/gnu/help2man/help2man-1.43.3.tar.gz')
+		shutit.send('gunzip help2man-1.43.3.tar.gz')
+		shutit.send('tar -xf help2man-1.43.3.tar')
+		shutit.send('pushd help2man-1.43.3')
 		shutit.send('./configure')
 		shutit.send('make')
 		shutit.send('make install')
@@ -54,9 +54,9 @@ class help2man(ShutItModule):
 
 def module():
 	return help2man(
-		'shutit.tk.help2man.help2man', 0.01124135,
+		'shutit.tk.help2man.help2man', 0.014124135,
 		description='',
 		maintainer='',
-		depends=['shutit.tk.xz.xz']
+		depends=['shutit.tk.automake.automake']
 	)
 

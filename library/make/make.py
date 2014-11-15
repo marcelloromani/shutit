@@ -20,9 +20,8 @@ class make(ShutItModule):
 		shutit.send('wget http://ftp.gnu.org/gnu/make/make-4.1.tar.gz')
 		shutit.send('gunzip make-4.1.tar.gz')
 		if shutit.file_exists('/root/tar'):
-			shutit.send('/root/tar -xf make-4.1.tar')
-		else:
-			shutit.send('tar -xf make-4.1.tar')
+			shutit.send('mv /root/tar /bin/tar')
+		shutit.send('tar -xf make-4.1.tar')
 		shutit.send('pushd make-4.1')
 		shutit.send('./configure')
 		shutit.send('sh build.sh') # to build make without make

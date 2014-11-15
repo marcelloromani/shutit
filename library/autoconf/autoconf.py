@@ -18,8 +18,8 @@ class autoconf(ShutItModule):
 		shutit.send('pushd /opt')
 		shutit.send('mkdir -p autoconf')
 		shutit.send('pushd autoconf')
-		shutit.send('wget http://ftp.gnu.org/gnu/autoconf/autoconf-latest.tar.xz')
-		shutit.send('xz -d autoconf-latest.tar.xz')
+		shutit.send('wget http://ftp.gnu.org/gnu/autoconf/autoconf-latest.tar.gz')
+		shutit.send('gunzip autoconf-latest.tar.gz')
 		shutit.send('tar -xf autoconf-latest.tar')
 		shutit.send('pushd autoconf-[0-9]*')
 		shutit.send('./configure')
@@ -58,6 +58,6 @@ def module():
 		'shutit.tk.autoconf.autoconf', 0.010925156,
 		description='',
 		maintainer='',
-		depends=['shutit.tk.xz.xz']
+		depends=['shutit.tk.make.make']
 	)
 
