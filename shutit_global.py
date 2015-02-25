@@ -2156,7 +2156,7 @@ class ShutIt(object):
 		self.send_file(self.cfg['build']['build_db_dir'] +
 					   '/' + self.cfg['build']['build_id'] +
 					   '/' + self.cfg['build']['build_id'] +
-					   '.cfg', util.print_config(self.cfg))
+					   '.cfg', util.config_to_string(self.cfg))
 
 
 	def get_emailer(self, cfg_section):

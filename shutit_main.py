@@ -706,7 +706,7 @@ def do_build(shutit):
 	"""
 	cfg = shutit.cfg
 	shutit.log('PHASE: build, repository work', code='31')
-	shutit.log(util.print_config(shutit.cfg))
+	shutit.log(util.config_to_string(shutit.cfg))
 	if cfg['build']['interactive'] >= 3:
 		print ('\nNow building any modules that need building' +
 	 	       util.colour('31', '\n\n[Hit return to continue]\n'))
@@ -936,12 +936,12 @@ def shutit_main():
 	# Dependency validation done, now collect configs of those marked for build.
 	config_collection_for_built(shutit)
 	if cfg['action']['list_configs'] or cfg['build']['debug']:
-		shutit.log(util.print_config(cfg, history=cfg['list_configs']['cfghistory']),
+		shutit.log(util.config_to_string(cfg, history=cfg['list_configs']['cfghistory']),
 				   force_stdout=True)
 		# Set build completed
 		cfg['build']['completed'] = True
 		f = file(cfg['build']['log_config_path'] + '/cfg.txt','w')
-		f.write(util.print_config(cfg, history=cfg['list_configs']['cfghistory']))
+		f.write(util.config_to_string(cfg, history=cfg['list_configs']['cfghistory']))
 		f.close()
 		shutit.log('================================================================================', force_stdout=True)
 		shutit.log('Config details placed in: ' + cfg['build']['log_config_path'], force_stdout=True)

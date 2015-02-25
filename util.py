@@ -390,7 +390,7 @@ def get_base_config(cfg, cfg_parser):
 		sys.exit()
 	if warn != '' and cfg['build']['debug']:
 		issue_warning('Showing config as read in. This can also be done by calling with list_configs:',2)
-		shutit_global.shutit.log(print_config(cfg), force_stdout=True, code='31')
+		shutit_global.shutit.log(config_to_string(cfg), force_stdout=True, code='31')
 		time.sleep(1)
 	if cfg['target']['hostname'] != '' and cfg['build']['net'] != '' and cfg['build']['net'] != 'bridge':
 		print('\n\ntarget/hostname or build/net configs must be blank\n\n')
@@ -858,7 +858,7 @@ def list_modules(shutit):
 	f.close()
 
 
-def print_config(cfg, hide_password=True, history=False):
+def config_to_string(cfg, hide_password=True, history=False):
 	"""Returns a string representing the config of this ShutIt run.
 	"""
 	cp = cfg['config_parser']
