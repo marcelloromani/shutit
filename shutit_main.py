@@ -36,6 +36,8 @@ import json
 import re
 import signal
 from distutils import spawn
+import logging
+import shutit_log
 
 
 def module_ids(shutit, rev=False):
@@ -864,6 +866,14 @@ def shutit_main():
 	cfg = shutit.cfg
 
 	util.parse_args(shutit)
+
+	# TODO allow some flexibility in logging config, e.g.
+	#     [build]
+	#     log_level: DEBUG
+	#     log_file: /path/to/logfile
+	# Allow to override these settings via command line switches, e.g.
+	# --log-level DEBUG --log-file /path/to/file
+	shutit_log.setup(logging.DEBUG)
 
 	if cfg['action']['skeleton']:
 		util.create_skeleton(shutit)
