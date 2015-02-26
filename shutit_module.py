@@ -27,26 +27,7 @@ from abc import ABCMeta, abstractmethod
 import decimal
 import inspect
 import sys
-
-
-# TODO: these don't belong here, but this module is 'top level' and doesn't
-# depend on any other shutit files.
-class ShutItException(Exception):
-	"""Placeholder exception. Implementation TODO.
-	"""
-	pass
-
-
-class ShutItModuleError(ShutItException):
-	"""Placeholder exception. Implementation TODO.
-	"""
-	pass
-
-
-class ShutItFailException(ShutItException):
-	"""Placeholder exception. Implementation TODO.
-	"""
-	pass
+from shutit_exception import ShutItException, ShutItFailException
 
 
 def shutit_method_scope(func):

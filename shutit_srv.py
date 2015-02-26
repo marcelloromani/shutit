@@ -35,7 +35,7 @@ from bottle import route, request, response, static_file
 
 import shutit_main
 import shutit_global
-from shutit_module import ShutItException
+from shutit_exception import ShutItException
 import util
 
 ORIG_MOD_CFG = None

@@ -25,7 +25,8 @@
 """
 
 
-from shutit_module import ShutItModule, ShutItException, ShutItFailException
+from shutit_module import ShutItModule
+from shutit_exception import ShutItException, ShutItFailException
 import ConfigParser
 import util
 import urllib
