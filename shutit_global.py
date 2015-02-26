@@ -190,14 +190,13 @@ class ShutIt(object):
 			sys.exit(1)
 
 
-	def log(self, msg, code=None, pause=0, prefix=True, force_stdout=False, add_final_message=False):
+	def log(self, msg, code=None, pause=0, prefix=True, force_stdout=False):
 		"""Logging function.
 
 		@param code:              Colour code for logging. Ignored if we are in serve mode
 		@param pause:             Length of time to pause after logging
 		@param prefix:            Whether to output logging prefix (LOG: <time>)
 		@param force_stdout:      If we are not in debug, put this in stdout anyway
-		@param add_final_message: Add this log line to the final message output to the user
 		"""
 		if prefix:
 			prefix = 'LOG: ' + time.strftime("%Y-%m-%d %H:%M:%S", 
@@ -212,8 +211,6 @@ class ShutIt(object):
 		if self.cfg['build']['build_log']:
 			print >> cfg['build']['build_log'], msg
 			self.cfg['build']['build_log'].flush()
-		if add_final_message:
-			shutit.cfg['build']['report_final_messages'] += msg + '\n'
 		time.sleep(pause)
 
 
