@@ -30,7 +30,6 @@ import socket
 import time
 import util
 import random
-import string
 import re
 import textwrap
 import base64
@@ -38,18 +37,6 @@ import getpass
 import package_map
 import datetime
 from shutit_module import ShutItFailException
-
-def random_id(size=8, chars=string.ascii_letters + string.digits):
-	"""Generates a random string of given size from the given chars.
-
-	@param size:  The size of the random string.
-	@param chars: Constituent pool of characters to draw random characters from.
-	@type size:   number
-	@type chars:  string
-	@rtype:       string
-	@return:      The string of random characters.
-	"""
-	return ''.join(random.choice(chars) for _ in range(size))
 
 
 class ShutIt(object):
@@ -727,7 +714,7 @@ class ShutIt(object):
 		child = child or self.get_default_child()
 		expect = expect or self.get_default_expect()
 		# assume we're going to add it
-		tmp_filename = '/tmp/' + random_id()
+		tmp_filename = '/tmp/' + util.random_id()
 		if self.file_exists(filename, expect=expect, child=child):
 			if literal:
 				if match_regexp == None:
@@ -821,7 +808,7 @@ class ShutIt(object):
 		# assume we're going to add it
 		res = '0'
 		bad_chars    = '"'
-		tmp_filename = '/tmp/' + random_id()
+		tmp_filename = '/tmp/' + util.random_id()
 		if match_regexp == None and re.match('.*[' + bad_chars + '].*',
 				line) != None:
 			line = line.replace('"',r'\"')
@@ -1507,7 +1494,7 @@ class ShutIt(object):
 		@type password:  string
 		"""
 		child = child or self.get_default_child()
-		r_id = random_id()
+		r_id = util.random_id()
 		self.login_stack_append(r_id)
 		self.send(command,expect=shutit.cfg['expect_prompts']['base_prompt'],check_exit=False)
 		self.setup_prompt(r_id,child=child)
@@ -1541,7 +1528,7 @@ class ShutIt(object):
 		@type timeout:          integer
 		"""
 		child = child or self.get_default_child()
-		r_id = random_id()
+		r_id = util.random_id()
 		self.login_stack_append(r_id)
 		if self.cfg['build']['delivery'] == 'bash' and command == 'su -':
 			# We want to retain the current working directory
@@ -1623,7 +1610,7 @@ class ShutIt(object):
 		@type set_default_expect:   boolean
 		"""
 		child = child or self.get_default_child()
-		local_prompt = 'SHUTIT_' + prefix + '#' + random_id() + '>'
+		local_prompt = 'SHUTIT_' + prefix + '#' + util.random_id() + '>'
 		shutit.cfg['expect_prompts'][prompt_name] = local_prompt
 		# Set up the PS1 value.
 		# Unset the PROMPT_COMMAND as this can cause nasty surprises in the output.

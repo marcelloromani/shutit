@@ -52,6 +52,7 @@ import shutil
 import manhole
 from shutit_module import ShutItFailException
 import operator
+import string
 
 _default_cnf = '''
 ################################################################################
@@ -1579,4 +1580,17 @@ def ctrl_c_signal_handler(signal, frame):
 	else:
 		print "CTRL-c caught, but not in context with ability to pause. CTRL-z and kill %n if you really want out."
 		time.sleep(1)
+
+
+def random_id(size=8, chars=string.ascii_letters + string.digits):
+	"""Generates a random string of given size from the given chars.
+
+	@param size:  The size of the random string.
+	@param chars: Constituent pool of characters to draw random characters from.
+	@type size:   number
+	@type chars:  string
+	@rtype:       string
+	@return:      The string of random characters.
+	"""
+	return ''.join(random.choice(chars) for _ in range(size))
 
