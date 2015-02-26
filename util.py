@@ -1519,7 +1519,6 @@ def util_raw_input(shutit=None, prompt='', default=None):
 	"""Handles raw_input calls, and switches off interactivity if there is apparently
 	no controlling terminal (or there are any other problems)
 	"""
-	msg = ''
 	if shutit and shutit.cfg['build']['interactive'] == 0:
 		return default
 	if not determine_interactive(shutit):
@@ -1527,9 +1526,9 @@ def util_raw_input(shutit=None, prompt='', default=None):
 	try:
 		return raw_input(prompt)
 	except:
-		msg = 'Problems getting raw input, assuming no controlling terminal.'
+		logging.warn('Problems getting raw input, assuming no controlling terminal.')
 	if shutit:
-		set_noninteractive(shutit,msg=msg)
+		set_noninteractive(shutit)
 	return default
 
 
@@ -1545,13 +1544,14 @@ def determine_interactive(shutit=None):
 			return False
 	except:
 		if shutit != None:
-			set_noninteractive(shutit,msg='Problems determining interactivity, assuming not.')
+			logging.warn('Problems determining interactivity, assuming not.')
+			set_noninteractive(shutit)
 		return False
 	return True
 
 
-def set_noninteractive(shutit,msg="setting non-interactive"):
-	logging.info(msg)
+def set_noninteractive(shutit):
+	logging.debug('setting non-interactive')
 	shutit.cfg['build']['interactive'] = 0
 	return
 
