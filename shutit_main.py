@@ -853,6 +853,15 @@ def shutit_main():
 		- list_configs - output computed configuration
 		- depgraph     - output digraph of module dependencies
 	"""
+
+	# TODO allow some flexibility in logging config, e.g.
+	#     [build]
+	#     log_level: DEBUG
+	#     log_file: /path/to/logfile
+	# Allow to override these settings via command line switches, e.g.
+	# --log-level DEBUG --log-file /path/to/file
+	shutit_log.setup(logging.DEBUG)
+
 	if sys.version_info.major == 2:
 		if sys.version_info.minor < 7:
 			shutit_global.shutit.fail('Python version must be 2.7+')
@@ -866,14 +875,6 @@ def shutit_main():
 	cfg = shutit.cfg
 
 	util.parse_args(shutit)
-
-	# TODO allow some flexibility in logging config, e.g.
-	#     [build]
-	#     log_level: DEBUG
-	#     log_file: /path/to/logfile
-	# Allow to override these settings via command line switches, e.g.
-	# --log-level DEBUG --log-file /path/to/file
-	shutit_log.setup(logging.DEBUG)
 
 	if cfg['action']['skeleton']:
 		util.create_skeleton(shutit)
