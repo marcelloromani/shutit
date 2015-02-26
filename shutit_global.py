@@ -179,14 +179,14 @@ class ShutIt(object):
 		# Note: we must not default to a child here
 		if child is not None:
 			self.pause_point('Pause point on fail: ' + msg, child=child)
-		print >> sys.stderr, 'ERROR!'
-		print >> sys.stderr
+
+		logging.critical(msg)
+
 		if throw_exception:
 			raise ShutItFailException(msg)
 		else:
 			# This is an "OK" failure, ie we don't need to throw an exception.
 			# However, it's still a failure, so return 1
-			print msg
 			sys.exit(1)
 
 
