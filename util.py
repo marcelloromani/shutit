@@ -52,6 +52,7 @@ import shutil
 import manhole
 from shutit_module import ShutItFailException
 import operator
+import logging
 
 _default_cnf = '''
 ################################################################################
