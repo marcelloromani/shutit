@@ -38,6 +38,7 @@ import getpass
 import package_map
 import datetime
 from shutit_module import ShutItFailException
+import logging
 
 def random_id(size=8, chars=string.ascii_letters + string.digits):
 	"""Generates a random string of given size from the given chars.
@@ -1638,7 +1639,7 @@ class ShutIt(object):
 				expect=['\r\n' + self.cfg['expect_prompts'][prompt_name]],
 				fail_on_empty_before=False, timeout=5, child=child)
 		if set_default_expect:
-			shutit.log('Resetting default expect to: ' +
+			logging.info('Resetting default expect to: ' +
 				shutit.cfg['expect_prompts'][prompt_name])
 			self.set_default_expect(shutit.cfg['expect_prompts'][prompt_name])
 
@@ -1661,7 +1662,7 @@ class ShutIt(object):
 				(old_prompt_name, old_prompt_name),
 				expect=expect, check_exit=False, fail_on_empty_before=False)
 		if not new_expect:
-			shutit.log('Resetting default expect to default')
+			logging.info('Resetting default expect to default')
 			self.set_default_expect()
 
 
