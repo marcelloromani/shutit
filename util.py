@@ -577,9 +577,7 @@ def parse_args(shutit):
 	if args.shutit_module_path is not None:
 		module_paths = args.shutit_module_path.split(':')
 		if '.' not in module_paths:
-			if cfg['build']['debug']:
-				shutit_global.shutit.log('Working directory path not included, adding...')
-				time.sleep(1)
+			logging.debug('Working directory path not included, adding...')
 			module_paths.append('.')
 		args.set.append(('host', 'shutit_module_path', ':'.join(module_paths)))
 	cfg['build']['debug']            = args.debug
@@ -779,10 +777,8 @@ def load_shutit_modules(shutit):
 	"""Responsible for loading the shutit modules based on the configured module
 	paths.
 	"""
-	if shutit.cfg['build']['debug']:
-		shutit.log('ShutIt module paths now: ')
-		shutit.log(shutit.cfg['host']['shutit_module_path'])
-		time.sleep(1)
+	logging.debug('ShutIt module paths now: ')
+	logging.debug(shutit.cfg['host']['shutit_module_path'])
 	for shutit_module_path in shutit.cfg['host']['shutit_module_path']:
 		load_all_from_path(shutit, shutit_module_path)
 
@@ -919,7 +915,7 @@ def load_all_from_path(shutit, path):
 	if not os.path.exists(path):
 		return
 	if os.path.exists(path + '/STOPBUILD') and not shutit.cfg['build']['ignorestop']:
-		shutit.log('Ignoring directory: ' + path + ' as it has a STOPBUILD file in it. Pass --ignorestop to shutit run to override.', force_stdout=True)
+		logging.info('Ignoring directory: ' + path + ' as it has a STOPBUILD file in it. Pass --ignorestop to shutit run to override.', force_stdout=True)
 		return
 	for sub in glob.glob(os.path.join(path, '*')):
 		subpath = os.path.join(path, sub)
@@ -942,7 +938,7 @@ def load_mod_from_file(shutit, fpath):
 	if file_ext.lower() != '.py':
 		return
 	if re.match('.*\/context\/.*',fpath):
-		shutit.log('Ignoring file: "' + fpath + '" as this appears to be part of the context directory')
+		logging.info('Ignoring file: "' + fpath + '" as this appears to be part of the context directory')
 		return
 	# Do we already have modules from this file? If so we know we can skip.
 	# Note that this attribute will only be set for 'new style' module loading,
@@ -956,8 +952,7 @@ def load_mod_from_file(shutit, fpath):
 	if len(existingmodules) > 0:
 		return
 	# Looks like it's ok to load this file
-	if shutit.cfg['build']['debug']:
-		shutit.log('Loading source for: ' + fpath)
+	logging.debug('Loading source for: ' + fpath)
 
 	# Add this directory to the python path iff not already there.
 	directory = os.path.dirname(fpath)
@@ -1515,7 +1510,7 @@ def parse_dockerfile(shutit, contents):
 				if m1:
 					ret.append(['COMMENT', m1.group(1)])
 				else:
-					shutit.log("Ignored line in parse_dockerfile: " + l)
+					logging.info("Ignored line in parse_dockerfile: " + l)
 				full_line = ''
 	return ret
 
@@ -1555,7 +1550,7 @@ def determine_interactive(shutit=None):
 
 
 def set_noninteractive(shutit,msg="setting non-interactive"):
-	shutit.log(msg)
+	logging.info(msg)
 	shutit.cfg['build']['interactive'] = 0
 	return
 
