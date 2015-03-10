@@ -9,6 +9,7 @@ def setup(log_level = logging.WARNING, log_file=None):
     @param log_level:   only messages with a severity equal or higher than this will be logged
                         default: logging.WARNING
     @param log_file:    name of the file to log to
+                        default: None
     """
     log_format = '%(asctime)s [%(levelname)-8s] %(module)s:%(funcName)s | %(msg)s'
     logging.basicConfig(format = log_format, level = log_level, filename = log_file)
