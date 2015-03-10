@@ -951,6 +951,7 @@ def shutit_main():
 		shutit.log('================================================================================', force_stdout=True)
 		shutit.log('\nConfiguration details have been written to the folder: ' + cfg['build']['log_config_path'] + '\n', force_stdout=True)
 		shutit.log('================================================================================', force_stdout=True)
+	if cfg['action']['list_configs']:
 		return
 	# Check for conflicts now.
 	errs.extend(check_conflicts(shutit))
@@ -975,6 +976,9 @@ def shutit_main():
 
 	shutit.log(util.build_report(shutit, '#Module: N/A (END)'), prefix=False,
 			   force_stdout=True, code='31')
+
+	if cfg['build']['build_log']:
+		shutit.cfg['build']['report_final_messages'] += "Build log file: " + cfg['host']['logfile']
 
 	# Show final report messages (ie messages to show after standard report).
 	if shutit.cfg['build']['report_final_messages'] != '':

@@ -151,7 +151,7 @@ ssh_cmd:
 
 # Aspects of build process
 [build]
-build_log:no
+build_log:yes
 # How to connect to target
 conn_module:shutit.tk.conn_docker
 # Run any docker container in privileged mode
@@ -277,7 +277,7 @@ def get_configs(shutit, configs):
 		else:
 			cp.read(config)
 	# Treat allowed_images as a special, additive case
-	shutit.cfg['build']['allowed_images'] = cp.get_config_set('build', 'allowed_images')
+	shutit.cfg['build']['shutit.core.module.allowed_images'] = cp.get_config_set('build', 'shutit.core.module.allowed_images')
 	return cp
 
 def issue_warning(msg, wait):
@@ -364,6 +364,7 @@ def get_base_config(cfg, cfg_parser):
 		logfile = os.path.join('/tmp/', 'shutit_log_' + cfg['build']['build_id'])
 	else:
 		logfile = logfile + '_' + cfg['build']['build_id']
+	cfg['host']['logfile'] = logfile
 	if cfg['build']['build_log']:
 		cfg['build']['build_log'] = open(logfile, 'a')
 		# Lock it down to the running user.
