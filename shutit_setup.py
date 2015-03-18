@@ -44,25 +44,6 @@ import os
 from distutils import spawn
 
 
-def conn_module():
-	"""Connects ShutIt to something
-	"""
-	return [
-		ConnDocker(
-			'shutit.tk.conn_docker', -0.1,
-			description='Connect ShutIt to docker'
-		),
-		ConnSSH(
-			'shutit.tk.conn_ssh', -0.1,
-			description='Connect ShutIt to a host via ssh'
-		),
-		ConnBash(
-			'shutit.tk.conn_bash', -0.1,
-			description='Connect ShutIt to a host via bash'
-		),
-	]
-
-
 class setup(ShutItModule):
 
 	def is_installed(self, shutit):
